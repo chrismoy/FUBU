@@ -1,24 +1,25 @@
 // I hope Ross sees my super active public Github repos
-
 require('dotenv').config();
-
 const AUTH = process.env.AUTH;
 
-const Discord = require('discord.js');
-const bot = new Discord.Client();
-const imgUrl = 'https://source.unsplash.com/featured/?{dude},{man},{bro}';
+const { Client, MessageEmbed } = require('discord.js');
+const client = new Client();
 
-bot.on('ready', () => {
-  console.log(`Do your jobs, love ${bot.user.tag}!`);
+client.on('ready', () => {
+  console.log(`Do your jobs, love ${client.user.tag}!`);
 });
 
-bot.on('message', msg => {
-  if (msg.content.toLowerCase() === 'send dudes') {
-    const attachment = new MessageAttachment(imgUrl);
-    const content = `${msg.author}, this dude supports the JRA:`;
+client.on('message', message => {
+  if (message.content.toLowerCase() === 'send dudes') {
+    const discordCacheBreaker = Math.random()
+    const imgUrl = `https://source.unsplash.com/random?dude${discordCacheBreaker}`;
 
-    msg.channel.send(content, attachment);
+    const content = `${message.author}, this dude supports the JRA:`;
+    const attachment = new MessageEmbed()
+      .setImage(imgUrl);
+
+    message.channel.send(content, attachment);
   }
 });
 
-bot.login(AUTH);
+client.login(AUTH);
