@@ -19,6 +19,8 @@ client.on('message', message => {
       .setImage(imgUrl);
 
     message.channel.send(content, attachment);
+  } else if (message.content.toLowerCase().includes("park")) {
+    message.channel.send("Park? All Glory to Chester");
   }
 });
 
