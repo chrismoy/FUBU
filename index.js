@@ -1,25 +1,24 @@
+// I hope Ross sees my super active public Github repos
+
 require('dotenv').config();
+
+const AUTH = process.env.AUTH;
+
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-const TOKEN = process.env.TOKEN;
-
-bot.login(TOKEN);
+const imgUrl = 'https://source.unsplash.com/featured/?{dude},{man},{bro}';
 
 bot.on('ready', () => {
-  console.info(`Logged in as ${bot.user.tag}!`);
+  console.log(`Do your jobs, love ${bot.user.tag}!`);
 });
 
 bot.on('message', msg => {
-  if (msg.content === 'ping') {
-    msg.reply('pong');
-    msg.channel.send('pong');
+  if (msg.content.toLowerCase() === 'send dudes') {
+    const attachment = new MessageAttachment(imgUrl);
+    const content = `${msg.author}, this dude supports the JRA:`;
 
-  } else if (msg.content.startsWith('!kick')) {
-    if (msg.mentions.users.size) {
-      const taggedUser = msg.mentions.users.first();
-      msg.channel.send(`You wanted to kick: ${taggedUser.username}`);
-    } else {
-      msg.reply('Please tag a valid user!');
-    }
+    msg.channel.send(content, attachment);
   }
 });
+
+bot.login(AUTH);
