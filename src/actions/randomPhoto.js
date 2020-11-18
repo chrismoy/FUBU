@@ -1,8 +1,8 @@
-import { MessageEmbed } = require('discord.js');
-import { equals } from './equality';
+import { MessageEmbed } from 'discord.js';
+import { equals } from './equality.js';
 
-const randomPhoto = (message, match = false, searchTerm = '') => {
-    return if !equals(searchTerm, match);
+const randomPhoto = (message, call, match = false, searchTerm = '') => {
+    if (!equals(message, call, match)) return;
 
     const cacheBreaker = Math.random()
     const imgUrl = `https://source.unsplash.com/random?${searchTerm}${cacheBreaker}`;
