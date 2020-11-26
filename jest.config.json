@@ -2,6 +2,7 @@
   "modulePaths": ["<rootDir>/src/"],
   "testMatch": ["<rootDir>/spec/**/*.spec.js"],
   "verbose": true,
+  "testEnvironment": "node",
   "transform": {
     "^.+\\.[t|j]sx?$": "babel-jest"
   }

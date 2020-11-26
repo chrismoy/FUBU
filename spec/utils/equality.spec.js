@@ -1,4 +1,4 @@
-import { contains, equals, matches } from 'actions/equality.js';
+import { contains, equals, matches } from 'utils/equality.js';
 
 describe('equality', () => {
   let message;

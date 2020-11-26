@@ -6,8 +6,7 @@ import { Client } from 'discord.js';
 dotenv.config();
 const AUTH = process.env.AUTH;
 
-import callAndResponse from './actions/callAndResponse.js';
-import randomPhoto from './actions/randomPhoto.js';
+import MessageProcessor from './helpers/MessageProcessor.js';
 
 class App {
   constructor() {
@@ -23,10 +22,12 @@ class App {
 
   initCallAndResponse() {
     this.client.on('message', message => {
-      callAndResponse(message, 'adamm', 'Adamm? good dude');
-      callAndResponse(message, 'park', 'All Glory to Chester');
+      const processor = new MessageProcessor(message);
 
-      randomPhoto(message, 'send dudes', true, 'dude');
+      processor.callAndResponse('adamm', 'Adammmm? good dude');
+      processor.callAndResponse('park', 'All Glory to Chester');
+
+      processor.randomPhoto('send dudes', 'dude', true);
     });
   }
 }
