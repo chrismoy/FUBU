@@ -8,14 +8,18 @@ export default class MessageProcessor {
     this.message = message;
   }
 
-  callAndResponse(call, content, match = false) {
+  async callAndRespond(call, content, match = false) {
     const message = this.message;
     if (!equals(message, call, match)) return;
 
-    message.channel.send(content);
+    try {
+        await message.channel.send(content);
+    } catch (error) {
+        console.error(error)
+    }
   }
 
-  randomPhoto(call, searchTerm = '', match = false) {
+  async randomPhoto(call, searchTerm = '', match = false) {
     const message = this.message;
     if (!equals(message, call, match)) return;
 
@@ -26,6 +30,10 @@ export default class MessageProcessor {
     const attachment = new MessageEmbed()
     attachment.setImage(imgUrl);
 
-    message.channel.send(content, attachment);
+    try {
+        await message.channel.send(content, attachment);
+    } catch (error) {
+        console.error(error)
+    }
   }
 }

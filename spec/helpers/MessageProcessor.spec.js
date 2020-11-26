@@ -10,24 +10,28 @@ describe('MessageProcessor', () => {
     processor = new MessageProcessor(message);
   });
 
-  describe('callAndResponse', () => {
+  it('Should be able to call new() on MessageProcessor', () => {
+    expect(processor).toBeTruthy();
+  });
+
+  describe('callAndRespond', () => {
     it('has an included substring', () => {
-      processor.callAndResponse('trap', 'passing test');
+      processor.callAndRespond('trap', 'passing test');
       expect(message.channel.send).toBeCalledWith('passing test');
     });
 
-    it('has a unincluded substring', () => {
-      processor.callAndResponse('tr4pg0d', 'passing test');
+    it('has an unincluded substring', () => {
+      processor.callAndRespond('tr4pg0d', 'passing test');
       expect(message.channel.send).not.toHaveBeenCalled()
     });
 
     it('has a matching string', () => {
-      processor.callAndResponse('trapgod', 'passing test', true);
+      processor.callAndRespond('trapgod', 'passing test', true);
       expect(message.channel.send).toBeCalledWith('passing test');
     });
 
     it('has a mismatched string', () => {
-      processor.callAndResponse('tr4pg0d', 'passing test', true);
+      processor.callAndRespond('tr4pg0d', 'passing test', true);
       expect(message.channel.send).not.toHaveBeenCalled()
     });
   });
@@ -41,17 +45,17 @@ describe('MessageProcessor', () => {
 
     it('has an included substring', () => {
       processor.randomPhoto('trap', 'dude');
-      expect(message.channel.send).toHaveBeenCalled();
+      expect(message.channel.send).toHaveBeenCalledTimes(1);
     });
 
-    it('has a unincluded substring', () => {
+    it('has an unincluded substring', () => {
       processor.randomPhoto('tr4pg0d', 'passing test');
       expect(message.channel.send).not.toHaveBeenCalled()
     });
 
     it('has a matching string', () => {
       processor.randomPhoto('trapgod', 'dude', true);
-      expect(message.channel.send).toHaveBeenCalled();
+      expect(message.channel.send).toHaveBeenCalledTimes(1);
     });
 
     it('has a mismatched string', () => {

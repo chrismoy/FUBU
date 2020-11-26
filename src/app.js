@@ -24,8 +24,8 @@ class App {
     this.client.on('message', message => {
       const processor = new MessageProcessor(message);
 
-      processor.callAndResponse('adamm', 'Adammmm? good dude');
-      processor.callAndResponse('park', 'All Glory to Chester');
+      processor.callAndRespond('adamm', 'Adammmm? good dude');
+      processor.callAndRespond('park', 'All Glory to Chester');
 
       processor.randomPhoto('send dudes', 'dude', true);
     });
