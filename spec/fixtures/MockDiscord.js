@@ -71,9 +71,11 @@ export default class MockDiscord {
         this.channel = new Channel(this.client, {
             id: 'channel-id',
         });
+        this.channel.send = jest.fn();
     }
     mockGuildChannel() {
         this.guildChannel = new GuildChannel(this.guild, Object.assign(Object.assign({}, this.channel), { name: 'guild-channel', position: 1, parent_id: '123456789', permission_overwrites: [] }));
+        this.guildChannel.send = jest.fn();
     }
     mockTextChannel() {
         this.textChannel = new TextChannel(this.guild, Object.assign(Object.assign({}, this.guildChannel), { topic: 'topic', nsfw: false, last_message_id: '123456789', lastPinTimestamp: new Date('2019-01-01').getTime(), rate_limit_per_user: 0 }));

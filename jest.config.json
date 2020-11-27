@@ -1,5 +1,5 @@
 {
-  "modulePaths": ["<rootDir>/src/"],
+  "modulePaths": ["<rootDir>/src/", "<rootDir>/config/"],
   "testMatch": ["<rootDir>/spec/**/*.spec.js"],
   "verbose": true,
   "testEnvironment": "node",

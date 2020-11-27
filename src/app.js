@@ -4,9 +4,10 @@ import dotenv from 'dotenv';
 import { Client } from 'discord.js';
 
 dotenv.config();
-const AUTH = process.env.AUTH;
+const DISCORD_AUTH = process.env.DISCORD_AUTH;
 
 import MessageProcessor from './helpers/MessageProcessor.js';
+import TwitterProcessor from './helpers/TwitterProcessor.js';
 
 class App {
   constructor() {
@@ -15,19 +16,28 @@ class App {
       console.log(`"Trap or Die"\n-Jeezy\n\nLove, ${this.client.user.tag}!`);
     });
 
-    this.initCallAndResponse()
+    this.client.login(DISCORD_AUTH);
 
-    this.client.login(AUTH);
+    this.initCallAndRespond();
+    this.initSocialMedia();
   }
 
-  initCallAndResponse() {
+  initCallAndRespond() {
     this.client.on('message', message => {
       const processor = new MessageProcessor(message);
 
-      processor.callAndRespond('adamm', 'Adammmm? good dude');
+      processor.callAndRespond('adamm', 'Good dude');
       processor.callAndRespond('park', 'All Glory to Chester');
 
       processor.randomPhoto('send dudes', 'dude', true);
+    });
+  }
+
+  initSocialMedia() {
+    this.client.on('message', message => {
+      const processor = new TwitterProcessor(message);
+
+      processor.getTweets();
     });
   }
 }
